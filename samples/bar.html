@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Hyper Responsive Bar Chart</title>
+    <script src="Chart.bundle.min.js"></script>
+    <script src="../Hyper.Responsive.Charts.js"></script>
+    <style>
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="container" style="width: 75%;">
+        <canvas id="canvas"></canvas>
+    </div>
+    <script>
+        var barChartData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [{
+                label: 'Dataset 1',
+                backgroundColor: "rgba(220,220,220,0.5)",
+                data: [65, 56,  12, 67, 67, 62, 49]
+            }]
+        };
+
+		var ctx = document.getElementById("canvas").getContext("2d");
+		window.myBar = new Chart(ctx, {
+			type: 'bar',
+			data: barChartData,
+			options: {
+				elements: {
+					rectangle: {
+						borderWidth: 2,
+						borderColor: 'rgb(0, 255, 0)',
+						borderSkipped: 'bottom'
+					}
+				},
+				responsive: true,
+				responsiveBreakPointConfig: {
+					defaultConfig: function(config) {
+						config.data.labels = ["January", "February", "March", "April", "May", "June", "July"];
+						config.data.datasets = [{
+							label: 'Dataset 1',
+							backgroundColor: "rgba(220,220,220,0.5)",
+							data: [65, 56,  12, 67, 67, 62, 49]
+						}];
+						config.options.scales.yAxes[0].ticks.max = 100;
+						config.options.scales.yAxes[0].ticks.min = 0;
+						config.options.scales.yAxes[0].ticks.stepSize = 20;
+						return config;
+					},
+					breakPoints: {
+						976: function(config) {
+							config.data.labels = ["January", "February", "March", "April", "May"];
+							config.data.datasets = [{
+								label: 'Dataset 1',
+								backgroundColor: "yellow",
+								data: [65, 56,  12, 67, 67]
+							}];
+							config.options.scales.yAxes[0].ticks.max = 100;
+							config.options.scales.yAxes[0].ticks.min = 0;
+							config.options.scales.yAxes[0].ticks.stepSize = 10;
+							return config;
+						},
+						624: function(config) {
+							config.data.labels = ["Jan", "Feb"];
+							config.data.datasets = [{
+								label: 'Dataset 1',
+								backgroundColor: "red",
+								data: [65, 66]
+							}];
+							config.options.scales.yAxes[0].ticks.max = 67;
+							config.options.scales.yAxes[0].ticks.min = 64;
+							config.options.scales.yAxes[0].ticks.stepSize = 1;
+							return config;
+						}
+					}
+				},
+				legend: {
+					position: 'top',
+				},
+				title: {
+					display: true,
+					text: 'Chart.js Bar Chart'
+				}
+			}
+		});
+    </script>
+</body>
+</html>
