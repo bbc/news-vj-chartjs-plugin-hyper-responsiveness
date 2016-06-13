@@ -1,0 +1,24 @@
+{
+  "name": "news-vj-chartjs-plugin-hyper-responsiveness",
+  "description": "Visually optimise chartjs charts for mobile and tablet devices",
+  "main": "Hyper.Responsive.Charts.js",
+  "authors": [
+    "Patrick Asare"
+  ],
+  "license": "Apache-2.0",
+  "keywords": [
+    "Charts",
+    "Chart.js",
+    "Plugin",
+    "Hyper",
+    "Responsive"
+  ],
+  "homepage": "https://github.com/bbc/news-vj-chartjs-plugin-hyper-responsiveness",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

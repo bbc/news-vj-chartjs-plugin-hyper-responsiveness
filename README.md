@@ -6,6 +6,14 @@ This plugin relies on v2.1.5 version of Charts.js which as of 10/6/2016 is pendi
 
 Specifically the notify plugin event on resize [feature](https://github.com/chartjs/Chart.js/blob/d9c335c860483faac7dbbcd60aa84e74cfbd3e3b/src/core/core.controller.js#L100) is required.
 
+## Installation
+
+```bash
+bower install chartjs-plugin-hyper-responsiveness --save
+```
+
+Alternatively take the required files from this repository
+
 ## Configuration
 Add the following objects to the chart config options.
 - `responsive: true`
