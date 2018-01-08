@@ -50,7 +50,7 @@ privateApi.updateConfigAtBreakpoint = function (argObj) {
 
         //change config back to default at non specified breakpoints
         if (argObj.size > parseInt(argObj.breakPoints[argObj.breakPoints.length - 1], 10)) {
-            config = config.options.responsiveBreakPointConfig.defaultConfig(config);
+            config = config.options.responsiveBreakPointConfig.breakPoints.defaultConfig(config);
             argObj.chartInstance.update(0, false);
             return true;
         }
