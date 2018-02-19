@@ -3,7 +3,8 @@
   "description": "Visually optimise chartjs charts for mobile and tablet devices",
   "main": "Hyper.Responsive.Charts.js",
   "authors": [
-    "Patrick Asare"
+    "Patrick Asare",
+    "Luke Ewer"
   ],
   "license": "Apache-2.0",
   "keywords": [
