@@ -1,6 +1,6 @@
 /*!
  * HyperResponsiveCharts.js
- * Version: 1.0.1
+ * Version: 1.0.2
  *
  * Copyright 2016 BBC
  * Released under the Apache 2.0 license
@@ -68,32 +68,66 @@ privateApi.updateConfigAtBreakpoint = function (argObj) {
     }
 };
 
-privateApi.deBounce = function (func, wait, argObj) {
-    var timeout;
+// https://stackoverflow.com/a/27078401/6289890
+privateApi.throttle = function (func, wait, options) {
+    var context, args, result, later,
+        timeout = null,
+        previous = 0;
+
+    if (!options) {
+        options = {};
+    }
+
+    later = function () {
+        previous = options.leading === false ? 0 : Date.now();
+        timeout = null;
+        result = func.apply(context, args);
+
+        if (!timeout) {
+            context = args = null;
+        }
+    };
 
     return function () {
-        var context, args, later, callNow;
+        var now = Date.now(),
+            remaining = wait - (now - previous);
+
+        if (!previous && options.leading === false) {
+            previous = now;
+        }
 
         context = this;
-        args = argObj;
-        later = function () {
-            timeout = null;
-            func.apply(context, [args]);
-        };
+        args = arguments;
 
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
+        if (remaining <= 0 || remaining > wait) {
+            if (timeout) {
+                clearTimeout(timeout);
+                timeout = null;
+            }
+
+            previous = now;
+            result = func.apply(context, args);
+
+            if (!timeout) {
+                context = args = null;
+            }
+        } else if (!timeout && options.trailing !== false) {
+            timeout = setTimeout(later, remaining);
+        }
+
+        return result;
     };
 };
 
-HyperResponsiveChartsPlugin = Chart.PluginBase.extend({
-    resize: function (chartInstance, size) {
-        var breakPoints, updateChart;
+privateApi.onResize = function (chartInstance, size) {
+    var breakPoints, updateChart;
 
-        breakPoints = privateApi.getUserDefinedBreakpoints(chartInstance);
-        updateChart = privateApi.deBounce(privateApi.updateConfigAtBreakpoint, 400, { size: size.width, breakPoints: breakPoints, chartInstance: chartInstance });
-        updateChart();
-    }
+    breakPoints = privateApi.getUserDefinedBreakpoints(chartInstance);
+    privateApi.updateConfigAtBreakpoint({ size: size.width, breakPoints: breakPoints, chartInstance: chartInstance });
+};
+
+HyperResponsiveChartsPlugin = Chart.PluginBase.extend({
+    resize: privateApi.throttle(privateApi.onResize, 200)
 });
 
 Chart.pluginService.register(new HyperResponsiveChartsPlugin());
