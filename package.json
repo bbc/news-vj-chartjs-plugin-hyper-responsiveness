@@ -1,6 +1,6 @@
 {
   "name": "news-vj-chartjs-plugin-hyper-responsiveness",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Enables chartjs config alterations at specified viewports",
   "main": "Hyper.Responsive.Charts.js",
   "scripts": {
