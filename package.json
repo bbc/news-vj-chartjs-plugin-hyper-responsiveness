@@ -1,6 +1,6 @@
 {
   "name": "news-vj-chartjs-plugin-hyper-responsiveness",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Enables chartjs config alterations at specified viewports",
   "main": "Hyper.Responsive.Charts.js",
   "scripts": {
@@ -17,7 +17,7 @@
     "Hyper",
     "Responsive"
   ],
-  "author": "Patrick Asare",
+  "author": "Patrick Asare, Luke Ewer, Steven Atherton",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/bbc/news-vj-chartjs-plugin-hyper-responsiveness/issues"

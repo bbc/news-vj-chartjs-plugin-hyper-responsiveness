@@ -1,6 +1,6 @@
 /*!
  * HyperResponsiveCharts.js
- * Version: 1.0.2
+ * Version: 1.0.3
  *
  * Copyright 2016 BBC
  * Released under the Apache 2.0 license
