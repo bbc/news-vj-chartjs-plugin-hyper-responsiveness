@@ -42,7 +42,7 @@ privateApi.pluginConfigSet = function (argObj) {
     return result;
 };
 
-privateApi.updateConfigAtBreakpoint = function (argObj) {
+privateApi.updateConfigAtBreakpoint = function (argObj, supressRedraw) {
     var config, currentBreakPoint, i, max;
 
     if (privateApi.pluginConfigSet(argObj)) {
@@ -51,7 +51,11 @@ privateApi.updateConfigAtBreakpoint = function (argObj) {
         //change config back to default at non specified breakpoints
         if (argObj.size > parseInt(argObj.breakPoints[argObj.breakPoints.length - 1], 10)) {
             config = config.options.responsiveBreakPointConfig.defaultConfig(config);
-            argObj.chartInstance.update(0, false);
+            if (!supressRedraw)
+            {
+                argObj.chartInstance.update(0, false);
+            }
+            
             return true;
         }
 
@@ -61,7 +65,10 @@ privateApi.updateConfigAtBreakpoint = function (argObj) {
             if (argObj.size < currentBreakPoint) {
                 selectedBreakPoint = currentBreakPoint;
                 config.options.responsiveBreakPointConfig.breakPoints[currentBreakPoint](config);
-                argObj.chartInstance.update(0, false);
+                if (!supressRedraw)
+                {
+                    argObj.chartInstance.update(0, false);
+                }
                 break;
             }
         }
@@ -123,11 +130,18 @@ privateApi.onResize = function (chartInstance, size) {
     var breakPoints, updateChart;
 
     breakPoints = privateApi.getUserDefinedBreakpoints(chartInstance);
-    privateApi.updateConfigAtBreakpoint({ size: size.width, breakPoints: breakPoints, chartInstance: chartInstance });
+    privateApi.updateConfigAtBreakpoint({ size: size.width, breakPoints: breakPoints, chartInstance: chartInstance }, true);
 };
 
 HyperResponsiveChartsPlugin = Chart.PluginBase.extend({
-    resize: privateApi.throttle(privateApi.onResize, 200)
+    resize: privateApi.throttle(privateApi.onResize, 200),
+
+    afterInit: function(chartInstance) {
+        var breakPoints, updateChart;
+
+            breakPoints = privateApi.getUserDefinedBreakpoints(chartInstance);
+            privateApi.updateConfigAtBreakpoint({ size: chartInstance.width, breakPoints: breakPoints, chartInstance: chartInstance }, true);
+    }
 });
 
 Chart.pluginService.register(new HyperResponsiveChartsPlugin());
