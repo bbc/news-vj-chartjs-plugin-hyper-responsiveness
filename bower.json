@@ -4,7 +4,8 @@
   "main": "Hyper.Responsive.Charts.js",
   "authors": [
     "Patrick Asare",
-    "Luke Ewer"
+    "Luke Ewer",
+    "Steven Atherton"
   ],
   "license": "Apache-2.0",
   "keywords": [
