@@ -1,12 +1,20 @@
 # Hyper Responsive Charts
+
 Enables chartjs config alterations at specified viewports. Used to visually optimise charts for mobile and tablet devices.
 
-## Prerequisites
+## Development
+
+To build the project run `npm run build`. This will compile the `Hyper.Responsive.Charts.js` bundle at the project root directory.
+
+## Usage
+
+### Prerequisites
+
 This plugin relies on v2.1.5 version of Charts.js which as of 10/6/2016 is pending release.  You can get the pre-release version of Chart.js from the [Chart.js repository](https://github.com/chartjs/Chart.js). A working version has been included in this repo.
 
 Specifically the notify plugin event on resize [feature](https://github.com/chartjs/Chart.js/blob/d9c335c860483faac7dbbcd60aa84e74cfbd3e3b/src/core/core.controller.js#L100) is required.
 
-## Installation
+### Installation
 
 ```bash
 bower install chartjs-plugin-hyper-responsiveness --save
@@ -14,7 +22,9 @@ bower install chartjs-plugin-hyper-responsiveness --save
 
 Alternatively take the required files from this repository
 
-## Configuration
+
+### Configuration
+
 Add the following objects to the chart config options.
 - `responsive: true`
 - `responsiveBreakPointConfig`
@@ -86,6 +96,7 @@ window.myBar = new Chart(ctx, {
 ```
 
 ## Todo
+
 - Load Chart.js vs 2.1.5 via npm
 - Add tests
 - Check for viewport on initial load
