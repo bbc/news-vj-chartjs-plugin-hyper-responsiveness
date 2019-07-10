@@ -33,7 +33,6 @@
     "gulp-sourcemaps": "^2.6.5",
     "gulp-streamify": "^1.0.2",
     "gulp-uglify": "^3.0.2",
-    "jshint": "^2.10.2",
     "merge-stream": "^1.0.0",
     "readable-stream": "^3.4.0",
     "vinyl-buffer": "^1.0.1",
